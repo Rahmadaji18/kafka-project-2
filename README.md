@@ -66,3 +66,22 @@ Jalankan perintah berikut untuk melatih model.
 Code python3 spark_ml/train_model.py
 ```
 Model yang dilatih akan disimpan sebagai model_1, model_2, dan seterusnya, sesuai dengan batch yang diproses.
+
+# 4. API dan Endpoint
+## 4.1 Menjalankan API
+Jalankan API yang meng-host model dan mengizinkan akses melalui endpoint.
+```
+python3 api/app.py
+```
+API akan berjalan pada localhost:5000. Setiap model dapat diakses melalui endpoint /predict-model/<model_id> .
+## 4.2 Requst
+Gunakan curl untuk mengirim data input ke model.
+```
+Code
+```
+## 4.3 Response
+API akan merespons dengan output sebagai berikut.
+```
+Code response
+```
+Output ... menandakan prediksi hasil dari model, sementara ... menunjukkan model yang digunakan.
