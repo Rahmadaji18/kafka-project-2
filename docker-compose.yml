@@ -1,0 +1,40 @@
+version: '3'
+services:
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: bitnami/kafka:latest
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  producer:
+    build: .
+    command: ["python", "producer.py"]
+    depends_on:
+      - kafka
+  consumer:
+    build: .
+    command: ["python", "consumer.py"]
+    depends_on:
+      - kafka
+  spark:
+    image: bitnami/spark:latest
+    ports:
+      - "4040:4040"
+    volumes:
+      - ./spark_script.py:/opt/spark_script.py
+    command: ["spark-submit", "/opt/spark_script.py"]
+  api:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - spark
