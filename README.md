@@ -12,7 +12,7 @@ Project ini mensimulasikan pemrosesan data stream menggunakan Apache Kafka dan A
 
 # 1. Persiapan
 
-## 1.1 Setup
+## 1.1 Topik
 Gunakan docker-compose.yml berikut untuk menyiapkan Apache Kafka dan Zookeeper.
 
 ```
