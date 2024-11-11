@@ -49,3 +49,20 @@ Buka terminal baru dan jalankan kafka_consumer.py untuk membaca data dari Kafka 
 ```
 python3 kafka_consumer.py
 ```
+Output akan disimpan dalam folder batch/ sesuai dengan jumlah data yang diterima per batch.
+
+# 3. Training Model dengan Spark ML
+## 3.1 Spark
+Aktifkan virtual environment.
+```
+python3 -m venv venv
+source venv/bin/activate
+```
+## 3.2 Melatih Model
+Script train_model.py ? akan memproses setiap batch data dari folder batch/, melakukan preprocessing, melatih model, dan menyimpannya di folder models/.
+
+Jalankan perintah berikut untuk melatih model.
+```
+Code python3 spark_ml/train_model.py
+```
+Model yang dilatih akan disimpan sebagai model_1, model_2, dan seterusnya, sesuai dengan batch yang diproses.
