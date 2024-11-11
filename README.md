@@ -12,7 +12,7 @@ Project ini mensimulasikan pemrosesan data stream menggunakan Apache Kafka dan A
 
 # 1. Persiapan
 
-## 1.1 Topik
+## 1.1 Setup
 Gunakan docker-compose.yml berikut untuk menyiapkan Apache Kafka dan Zookeeper.
 
 ```
@@ -24,7 +24,7 @@ Jalankan container Docker dengan perintah berikut.
 docker-compose up --build
 ```
 
-## 1.2 Kafka
+## 1.2 Topik
 Masuk ke container Kafka.
 ```
 docker exec -it kafka bash
