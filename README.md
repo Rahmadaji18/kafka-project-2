@@ -13,27 +13,39 @@ Project ini mensimulasikan pemrosesan data stream menggunakan Apache Kafka dan A
 # 1. Persiapan
 
 ## 1.1 Setup
-Gunakan docker-compose.yml berikut untuk menyiapkan Apache Kafka dan Zookeeper:
+Gunakan docker-compose.yml berikut untuk menyiapkan Apache Kafka dan Zookeeper.
 
 ```
 Code
 ```
 
-Jalankan container Docker dengan perintah berikut:
+Jalankan container Docker dengan perintah berikut.
 ```
 docker-compose up --build
 ```
 
 ## 1.2 Kafka
-Masuk ke container Kafka:
+Masuk ke container Kafka.
 ```
 docker exec -it kafka bash
 ```
-Buat topik bernama kafka-server ? :
+Buat topik bernama kafka-server ? .
 ```
 Code 
 ```
-Cek apakah topik sudah berhasil dibuat:
+Cek apakah topik sudah berhasil dibuat.
 ```
 kafka-topics.sh --list --bootstrap-server localhost:9092
+```
+
+# 2. Streaming Data dengan Kafka
+## 2.1 Menjalankan Kafka Procedur
+kafka_producer.py akan membaca dataset dan mengirimkan data per baris ke Kafka dengan jeda acak.
+```
+python3 kafka_producer.py
+```
+## 2.2 Menjalankan Kafka Consumer
+Buka terminal baru dan jalankan kafka_consumer.py untuk membaca data dari Kafka dan menyimpannya dalam batch.
+```
+python3 kafka_consumer.py
 ```
