@@ -1,7 +1,8 @@
 from flask import Flask, request, jsonify
-from pyspark.ml.classification import RandomForestClassificationModel
+from pyspark.ml.classification import GBTClassificationModel
 from pyspark.ml.linalg import Vectors
 from pyspark.sql import SparkSession
+from pyspark.sql import Row
 import os
 
 app = Flask(__name__)
@@ -17,7 +18,7 @@ MODEL_PATH = "spark/models/"
 def load_model(model_name):
     model_path = os.path.join(MODEL_PATH, model_name)
     if os.path.exists(model_path):
-        return RandomForestClassificationModel.load(model_path)
+        return GBTClassificationModel.load(model_path)
     else:
         return None
 
@@ -46,8 +47,12 @@ def predict(model_id):
     if not model:
         return jsonify({"error": f"Model {model_id} not found"}), 404
 
-    # Perform prediction
-    prediction = model.predict(input_vector)
+    # Convert the input vector into a DataFrame
+    input_df = spark.createDataFrame([Row(features=input_vector)])
+
+    # Perform prediction using transform()
+    prediction_df = model.transform(input_df)
+    prediction = prediction_df.collect()[0].prediction  # Extract prediction
 
     return jsonify({"model": int(model_id), "diabetes": int(prediction)})
 
