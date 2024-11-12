@@ -20,7 +20,7 @@ counter = 0
 header = 'gender,age,hypertension,heart_disease,smoking_history,bmi,HbA1c_level,blood_glucose_level,diabetes\n'
 
 # Open the first batch file
-output = open(f'../Batch/batch{batch}.csv', 'w', encoding='utf-8')
+output = open(f'../batch/batch{batch}.csv', 'w', encoding='utf-8')
 output.write(header)
 output.flush()  # Ensure header is written immediately
 
@@ -39,6 +39,6 @@ for message in consumer:
         counter = 0     # Reset counter
         
         # Open a new batch file for the next batch of messages
-        output = open(f'../Batch/batch{batch}.csv', 'w', encoding='utf-8')
+        output = open(f'../batch/batch{batch}.csv', 'w', encoding='utf-8')
         output.write(header)
         output.flush()  # Ensure header is written immediately

@@ -17,6 +17,3 @@ with open(dataset, 'r') as f:
         producer.send('server-kafka', value=row)
         print(row)
         sleep(random.uniform(0.05, 0.5))
-
-# producer.flush()
-# producer.close()
