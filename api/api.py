@@ -9,18 +9,15 @@ app = Flask(__name__)
 
 # Initialize Spark session
 spark = SparkSession.builder \
-    .appName("FlaskSparkMLApp") \
+    .appName("SparkApp") \
     .master("local[*]") \
     .getOrCreate()
 
-MODEL_PATH = "spark/models/"
+MODEL_DIR = "spark/models/"
 
 def load_model(model_name):
-    model_path = os.path.join(MODEL_PATH, model_name)
-    if os.path.exists(model_path):
-        return GBTClassificationModel.load(model_path)
-    else:
-        return None
+    model_dir = os.path.join(MODEL_DIR, model_name)
+    return GBTClassificationModel.load(model_dir) if os.path.exists(model_dir) else None
 
 # Prepare features for the model based on the new variables
 def prepare_features(data):
